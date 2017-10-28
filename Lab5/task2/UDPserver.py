@@ -2,6 +2,7 @@
 from socket import *
 import re
 
+
 def receiver(ip, serverPort):
     # Assign a port number
     # Create a UDP server socket
@@ -16,9 +17,10 @@ def receiver(ip, serverPort):
         # Receives the request message from the client
         message, clientAddress = serverSocket.recvfrom(2048)
         temp = parser(message.decode()).decode()
-        print("{}: {}".format(temp[0],temp[1]))
+        print("{}: {}".format(temp[0], temp[1]))
         # sentence = input('Me: ')
         # serverSocket.sendto(sentence.encode(), (ip, serverPort))
+
 
 # receiver('127.0.0.1', 12021)
 
@@ -29,4 +31,4 @@ class parser:
     def decode(self):
         pattern = "^<identifier=\"(.*?)\"><content=\"(.*?)\">$"
         # print(re.findall(pattern,self.codes))
-        return re.findall(pattern,self.codes)[0]
+        return re.findall(pattern, self.codes)[0]

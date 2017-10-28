@@ -5,8 +5,8 @@ import threading
 threads = []
 ip1 = '127.0.0.1'
 
-t1 = threading.Thread(target=UDPserver.receiver, args=(ip1, 12025))
-t2 = threading.Thread(target=UDPclient.client, args=("Jerry", ip1, 12020))
+t1 = threading.Thread(target=UDPserver.receiver, args=(ip1, 12020))
+t2 = threading.Thread(target=UDPclient.client, args=("Tom", ip1, 12025))
 
 threads.append(t1)
 threads.append(t2)
