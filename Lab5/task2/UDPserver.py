@@ -1,5 +1,6 @@
 # Import socket module
 from socket import *
+import re
 
 def receiver(ip, serverPort):
     # Assign a port number
@@ -9,11 +10,23 @@ def receiver(ip, serverPort):
     serverSocket = socket(AF_INET, SOCK_DGRAM)
     # Bind the socket to server address and server port
     serverSocket.bind((ip, serverPort))
-    print(('The server is ready to receive'))
+    print(('Server is ready to receive.'))
     # Server should be up and running and listening to the incoming connections
     while 1:
         # Receives the request message from the client
         message, clientAddress = serverSocket.recvfrom(2048)
-        print('Client: ' + message.decode())
+        temp = parser(message.decode()).decode()
+        print("{}: {}".format(temp[0],temp[1]))
+        # sentence = input('Me: ')
+        # serverSocket.sendto(sentence.encode(), (ip, serverPort))
 
-receiver('127.0.0.1', 12000)
+# receiver('127.0.0.1', 12021)
+
+class parser:
+    def __init__(self, codes):
+        self.codes = codes
+
+    def decode(self):
+        pattern = "^<identifier=\"(.*?)\"><content=\"(.*?)\">$"
+        # print(re.findall(pattern,self.codes))
+        return re.findall(pattern,self.codes)[0]
