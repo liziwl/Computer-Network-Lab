@@ -4,8 +4,8 @@ import threading
 threads = []
 ip1 = '127.0.0.1'
 
-t1 = threading.Thread(target=UDPchat.receiver, args=(ip1, 12025))
-t2 = threading.Thread(target=UDPchat.client, args=("Jerry", ip1, 12020))
+t1 = threading.Thread(target=UDPchat.receiver, args=(ip1, 12025))  # 接受端口
+t2 = threading.Thread(target=UDPchat.client, args=("Jerry", ip1, 12020))  # 用户名，发送端口
 
 threads.append(t1)
 threads.append(t2)
