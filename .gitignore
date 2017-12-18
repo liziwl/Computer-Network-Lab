@@ -2,3 +2,6 @@
 
 #IDE metadata
 .idea/
+
+*.zip
+*.rar
