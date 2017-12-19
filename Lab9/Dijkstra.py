@@ -153,7 +153,7 @@ def dijkstra(graph, src):
     nodes = [i for i in range(len(graph))]
     dist_detail = []
     map = Dijkstra(graph_dict)
-    map.print_graph()
+    # map.print_graph()
     for i in nodes:
         dist_detail.append(map.search(src, i))
 
@@ -175,6 +175,42 @@ def dijkstra(graph, src):
     return distance, path, forwarding_table
 
 
+def print_path(src, path, distance):
+    text = "Route Path from {}".format(src)
+    max_len = len(max(list(path.values()), key=len))
+    print(text)
+    print('-' * (max_len * 5 + 10))
+    print("{} | {} | {}".format("Dest", "Dist", "Path"))
+    print('-' * (max_len * 5 + 10))
+    for i in path:
+        print("{:^4d} | {:^4d} | {}".format(i, distance[i], path_str(path[i])))
+    print('-' * (max_len * 5 + 10))
+    print()
+
+
+def print_for(src, forwarding_table):
+    text = "Forwarding table from {}".format(src)
+    max_len = len(max(list(path.values()), key=len))
+    print(text)
+    print('-' * (max_len * 5 + 5))
+    print("{} | {}".format("Dest", "To"))
+    print('-' * (max_len * 5 + 5))
+    for i in path:
+        print("{:^4d}| {}".format(i, forwarding_table[i]))
+    print('-' * (max_len * 5 + 5))
+    print()
+
+
+def path_str(sig):
+    st = ''
+    for i in range(len(sig)):
+        if i != len(sig) - 1:
+            st += str(sig[i]) + ' - '
+        else:
+            st += str(sig[i])
+    return st
+
+
 if __name__ == '__main__':
     graph_list = [[0, 7, float('inf'), 3, 3, 2],
                   [7, 0, 5, float('inf'), 1, 2],
@@ -183,7 +219,7 @@ if __name__ == '__main__':
                   [3, 1, float('inf'), float('inf'), 0, float('inf')],
                   [2, 2, 3, 1, float('inf'), 0]]
 
-    distance, path, forwarding_table = dijkstra(graph_list, 3)  # 查找从源点3开始到其他节点的最短路径
-    print(distance)
-    print(path)
-    print(forwarding_table)
+    src = 3
+    distance, path, forwarding_table = dijkstra(graph_list, src)  # 查找从源点3开始到其他节点的最短路径
+    print_path(src, path, distance)
+    print_for(src, forwarding_table)
