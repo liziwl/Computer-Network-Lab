@@ -13,3 +13,6 @@
 ### Simple chat model
 1. send and receive thread can be running simultaneously.
 2. Not just complete the chat that one by one to send a message.
+
+## Lab9
+implement Dijkstra algorithm
